@@ -29,4 +29,5 @@ Implement login feature with userid and password. Get the permissions based on t
 HAD should be able to see everyone's details.
 Wardens should be able to see only their hostel's student's details.
 Students should only be able to see their own details.
+
 Note: You need not focus too much on the design of the website. It can be made with simple HTML and CSS. You are allowed to use Bootstrap if you do not wish to write CSS.
