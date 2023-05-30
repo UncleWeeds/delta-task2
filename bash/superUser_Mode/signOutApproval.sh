@@ -1,9 +1,9 @@
 #!/bin/bash
 
 warden=$(whoami)
-signOutinfo="/home/bash/signOutInfo.txt"
+signOutinfo="/home/bash/superUser_Mode/signOutInfo.txt"
 # Read sign-out requests from userDetails.txt
-file="/home/bash/signOutInfo.txt"
+file="$/home/bash/superUser_Mode/signOutInfo.txt"
 request=$(tail -n1 "$file" | awk '{print $6}')
 name=$(tail -n1 "$file" | awk '{print $4}')
   read -p "Student has requested sign-out until $request. Approve? (Y/N): " approval

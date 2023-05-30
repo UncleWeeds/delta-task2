@@ -1,8 +1,8 @@
 FROM ubuntu:latest
 
 # Update package lists and install required packages
-#RUN apt-get update && \
- #   apt-get install -y sudo
+RUN apt-get update && \
+    apt-get install -y sudo acl vim bc
 
 # Set the working directory to /home
 WORKDIR /home/bash

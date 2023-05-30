@@ -2,7 +2,7 @@
 name=$(whoami)
 filee="/home/bash/studentDetails.txt"
 hostel=$(cat "$filee" | grep "$name" | awk '{print $3}')
-signOutinfo="/home/bash/signOutInfo.txt"
+signOutinfo="/home/bash/superUser_Mode/signOutInfo.txt"
    warden="$hostel"
    return_date=""
 
@@ -16,5 +16,3 @@ if [[ ${?} -eq 0 ]]; then
   echo "Sign-out request submitted. Waiting for approval."
 fi
 
-# Execute the signOut function when the alias is run
-alias signOut="signOut"

@@ -1,5 +1,5 @@
 #!/bin/bash
-file="/home/bash/signOutInfo.txt"
+file="/home/bash/superUser_Mode/signOutInfo.txt"
 current_date=$(date +%Y-%m-%d)
 student=$(tail -n1 "$file" | awk '{print $4}')
 last_line=$(tail -n1 "$file")

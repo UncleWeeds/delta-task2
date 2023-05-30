@@ -7,14 +7,12 @@ then
 fi
  
 if [ -n "$1" ]; then
-  # File is provided as command line argument
   file="$1"
   if [ ! -f "$file" ]; then
     echo "Error: File not found." >&2
     exit 1
   fi
 else
-  # File is not provided, prompt for input
   read -p "Enter student details (Name RollNumber Hostel Room): " -a details
   if [ -z "${details[*]}" ]; then
     echo "Error: No student details provided." >&2
@@ -36,29 +34,35 @@ while IFS= read -r line; do
 
  PASSWORD="${name}"
 
-sudo useradd -m  HAD
+  useradd -m -d "/home/HAD"  HAD &>/dev/null
   echo "HAD:$PASSWORD" | sudo chpasswd || {
     echo "Error: Failed to create HAD user." >&2
     exit 1
   }
 
-  sudo useradd -m  "$hostel"
+  useradd -m  "$hostel" &>/dev/null
   echo "$hostel:$PASSWORD" | sudo chpasswd || {
     echo "Error: Failed to create hostel user." >&2
     exit 1
   }
 
-  sudo useradd -m  "$name"
+  useradd -m -d "/home/$name"  "$name" &>/dev/null
   echo "$name:$PASSWORD" | sudo chpasswd || {
     echo "Error: Failed to create student user." >&2
     exit 1
   }
 
-  sudo mkdir -p "/home/$hostel/$room/$name" || {
+    mkdir -p "/home/$hostel/$room/$name" || {
     echo "Error: Failed to create directory." >&2
     exit 1
   }
+
     userDetails="/home/$hostel/$room/$name/userDetails.txt"
+    touch "$userDetails" || {
+    echo "Error: Failed to create fees file." >&2
+    exit 1
+  }
+
     >"$userDetails"
     echo "Name: $name" > "$userDetails"
     echo "Roll Number: $rollNumber" >> "$userDetails"
@@ -67,7 +71,6 @@ sudo useradd -m  HAD
     echo "Hostel: $hostel" >> "$userDetails"
     echo "Allocated Mess: $mess" >> "$userDetails"
     echo "Month: -" >> "$userDetails"
-
 
   fees="/home/$hostel/$room/$name/fees.txt"
   touch "$fees" || {
@@ -86,6 +89,7 @@ sudo useradd -m  HAD
     echo "Error: Failed to create feeDefaulters file." >&2
     exit 1
   }
+  touch "/home/HAD/allocated_messes.txt"
 
   mess="/home/HAD/mess.txt"
   touch "$mess" || {
@@ -93,3 +97,4 @@ sudo useradd -m  HAD
     exit 1
   }
 done < studentDetails.txt
+
